@@ -97,10 +97,6 @@ p {
   transition: all var(--animation-duration) ease-in-out;
   z-index: 1;
 }
-#navbar.navbar--semidark {
-  background-color: #1848a0;
-  opacity: 0.8;
-}
 #navbar.navbar--dark {
   background-color: #1848a0;
   opacity: 1;

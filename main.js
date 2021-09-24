@@ -2,19 +2,13 @@
 
 const navbar = document.querySelector('#navbar')
 const navbarHeight = navbar.getBoundingClientRect().height
-const home = document.querySelector('#home')
-const homeHeight = home.getBoundingClientRect().height
 
 // scrollY 의 높이가 navbarHeight 보다 크면 특정 class 를 추가
 document.addEventListener('scroll', () => {
-  if ( (window.scrollY > navbarHeight) && (window.scrollY < homeHeight) ) {
-    navbar.classList.remove('navbar--dark')
-    navbar.classList.add('navbar--semidark')
-  } else if ( window.scrollY > homeHeight) {
-    navbar.classList.remove('navbar--semidark')
+  if ( window.scrollY > navbarHeight ) {
     navbar.classList.add('navbar--dark')
   } else {
-    navbar.classList.remove('navbar--semidark', 'navbar--dark')
+    navbar.classList.remove('navbar--dark')
   }
 })
 
@@ -41,11 +35,22 @@ function scrollIntoView(selector) {
   scrollTo.scrollIntoView({behavior: "smooth"})
 }
 
-// Handle click on 'contact me' button on home
+// 'contact me' 버튼을 클릭하면 'contact' 섹션으로 이동
 const contactBtn = document.querySelector('.home__contact')
 contactBtn.addEventListener('click', () => {
   scrollIntoView('#contact')
 })
 
 
+
+// 스크롤 내릴 때 '홈'섹션이 투명해지게 하기
+const home = document.querySelector('#home')
+const homeHeight = home.getBoundingClientRect().height
+const homeContainer = document.querySelector('.home__container')
+
+document.addEventListener('scroll', () => {
+  let res = 1 - Math.round((window.scrollY / homeHeight) * 100)/100
+  if ( res < 0 ) return
+  homeContainer.style.opacity = `${res}`
+})
 
