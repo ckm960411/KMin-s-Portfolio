@@ -442,6 +442,30 @@ p {
 }
 
 
+/* Scroll */
+.arrow-up {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 70px;
+  height: 70px;
+  font-size: var(--font-large);
+  background-color: var(--color-dark-pink);
+  color: var(--color-white);
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none; /* 안 보일 때는 클릭이 안 되게끔*/
+  transition: all .3s ease-in;
+}
+
+.arrow-up.visible {
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+
 /* 반응형 만들기 */
 /* For below 768px screen width */
 @media screen and (max-width: 800px) {

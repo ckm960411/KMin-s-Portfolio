@@ -54,3 +54,18 @@ document.addEventListener('scroll', () => {
   homeContainer.style.opacity = `${res}`
 })
 
+
+// 스크롤을 내리면 'arrow up' 버튼 보이기
+const arrowUp = document.querySelector('.arrow-up')
+document.addEventListener('scroll', () => {
+  if ( window.scrollY > homeHeight/2 ) {
+    arrowUp.classList.add('visible')
+  } else {
+    arrowUp.classList.remove('visible')
+  }
+})
+
+// 'arrow up' 버튼을 클릭하면 위로 올라가도록 하기
+arrowUp.addEventListener('click', () => {
+  scrollIntoView('#home')
+})
