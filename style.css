@@ -361,11 +361,11 @@ p {
   transition: all var(--animation-duration) ease-in
 }
 .project:hover .project__description {
-  opacity: 0.7;
+  opacity: 0.9;
 }
 
 .project__description h3 {
-  color: var(--color-white);
+  color: var(--color-orange);
   transition: all var(--animation-duration) ease-in
 }
 .project__description h3, .project__description span {
@@ -382,9 +382,9 @@ p {
   display: block;
   position: relative;
   left: 50%;
-  width: 25px;
+  width: 50px;
   height: 2px;
-  margin-left: -12px;
+  transform: translateX(-50%);
   margin-top: 8px;
   background-color: var(--color-dark-white);
 }
@@ -486,12 +486,16 @@ p {
   #navbar {
     flex-direction: column;
     align-items: flex-start;
+    background-color: #1848a0;
   }
   .navbar__menu {
     flex-direction: column;
     text-align: center;
     width: 100%;
     display: none;
+  }
+  .navbar__menu.open {
+    display: block;
   }
   .about__majors {
     flex-direction: column;

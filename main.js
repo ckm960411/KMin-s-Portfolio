@@ -21,6 +21,7 @@ navbarMenu.addEventListener('click', (event) => {
   if ( link == null ) {
     return
   }
+  navbarMenu.classList.remove('open')
   const scrollTo = document.querySelector(link)
   const top = scrollTo.offsetTop - navbarHeight < 0 ? 0 : scrollTo.offsetTop - navbarHeight
   window.scrollTo({
@@ -28,6 +29,17 @@ navbarMenu.addEventListener('click', (event) => {
     left: 0,
     behavior: 'smooth'
   })
+})
+
+// navbar toggle 버튼을 클릭하면 nav 메뉴가 표시되게끔 하기
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn')
+
+navbarToggleBtn.addEventListener('click', () => {
+  navbarMenu.classList.toggle('open')
+})
+
+window.addEventListener('scroll', () => {
+  navbarMenu.classList.remove('open')
 })
 
 function scrollIntoView(selector) {
