@@ -29,6 +29,7 @@ navbarMenu.addEventListener('click', (event) => {
     left: 0,
     behavior: 'smooth'
   })
+  selectNavItem(target)
 })
 
 // navbar toggle 버튼을 클릭하면 nav 메뉴가 표시되게끔 하기
@@ -63,7 +64,7 @@ const homeContainer = document.querySelector('.home__container')
 document.addEventListener('scroll', () => {
   let res = 1 - Math.round((window.scrollY / homeHeight) * 100)/100
   if ( res < 0 ) return
-  homeContainer.style.opacity = `${res}`
+  homeContainer.style.opacity = res
 })
 
 
@@ -115,3 +116,65 @@ workBtnContainer.addEventListener('click', (e) => {
   }, 300)
 })
 
+
+
+// 스크롤을 내리면 해당 영역에 해당하는 navbar 가 활성화되기
+// 1. 모든 섹션 요소들과 메뉴아이템들을 가지고 온다.
+const sectionIds = [
+  '#home', 
+  '#about', 
+  '#skills', 
+  '#work', 
+  '#testimonials', 
+  '#contact'
+]
+const sections = sectionIds.map(id => document.querySelector(id))
+const navItems = sectionIds.map(id => document.querySelector(`[data-link="${id}"]`))
+
+// 2. IntersectionObserver 를 이용해서 모든 섹션들을 관찰한다.
+let selectedNavIndex = 0
+let selectedNavItem = navItems[0]
+function selectNavItem(selected) {
+  selectedNavItem.classList.remove('active')
+  selectedNavItem = selected
+  selectedNavItem.classList.add('active')
+}
+
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.3,
+}
+const observerCallback = (entries, observer) => {
+  entries.forEach(entry => {
+    // 3. 보여지는 섹션에 해당하는 메뉴 아이템을 활성화시킨다.
+    if (!entry.isIntersecting && entry.intersectionRatio > 0) { 
+      // entry 가 빠져나갈 때, 즉 스크롤이 내려갈 때
+      // && 화면상에 보여지고 있을 때 (entry.intersectionRation > 0)
+      const index = sectionIds.indexOf(`#${entry.target.id}`)
+
+      // 스크롤링이 아래로 되어서 페이지가 올라옴
+      if (entry.boundingClientRect.y < 0) {
+        selectedNavIndex = index + 1
+      } else { // 페이지가 내려가는 경우
+        selectedNavIndex = index - 1
+      }
+      
+
+    }
+  })
+}
+
+const observer = new IntersectionObserver(observerCallback, observerOptions)
+sections.forEach(section => observer.observe(section))
+
+window.addEventListener('wheel', () => {
+  if (scrollY === 0 ) {
+    // 현재 스크롤이 제일 위에 있다면
+    selectedNavIndex = 0
+  } else if (scrollY + window.innerHeight === document.body.clientHeight) {
+    // 제일 밑으로 도달했다면
+    selectedNavIndex = navItems.length - 1
+  }
+  selectNavItem(navItems[selectedNavIndex])
+})

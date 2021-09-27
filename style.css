@@ -284,6 +284,7 @@ p {
   margin: 40px;
 }
 .category__btn {
+  position: relative;
   border: 1px solid var(--color-dark-white);
   border-radius: var(--size-border-radius);
   font-size: var(--font-regular);
@@ -303,16 +304,16 @@ p {
   height: 24px;
   display: inline-block;
   line-height: 24px;
-  position: relative;
+  position: absolute;;
   top: -20px;
-  left: 40px;
+  right: 16px;
   opacity: 0;
   transition: all var(--animation-duration);
 }
 .category__btn.selected .category__count,
 .category__btn:hover .category__count {
   opacity: 1;
-  top: 0;
+  top: 4px;
 }
 
 .work__projects {
@@ -478,10 +479,12 @@ p {
 
 
 /* 반응형 만들기 */
-/* For below 768px screen width */
 @media screen and (max-width: 800px) {
   .navbar__toggle-btn {
     display: block;
+    top: 16px;
+    right: 16px;
+    font-size: var(--font-medium);
   }
   #navbar {
     flex-direction: column;
@@ -497,20 +500,69 @@ p {
   .navbar__menu.open {
     display: block;
   }
+}
+/* For below 768px screen width */
+@media screen and (max-width: 768px) {
+  :root {
+    --font-large: 30px;
+    --font-medium: 18px;
+    --font-regular: 16px;
+    --font-small: 14px;
+    --font-micro: 12px;
+  }
+  .section {
+    padding: 16px;
+  }
   .about__majors {
     flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 0px;
   }
   .major {
-    margin-bottom: 38px;
+    margin-bottom: 30px;
   }
   .skillset {
     flex-direction: column;
   }
+  .category__btn {
+    margin: 4px 0;
+    width: 80%;
+  }
+  .category__count {
+    right: 16px;;
+  }
   .project {
     flex-grow: 1;
   }
+
+  .testimonials {
+    margin: 10px;
+  }
+  .testimonial {
+    flex-direction: column;
+    margin: 20px 0;
+    align-items: center;
+  }
   .testimonial__avatar {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
+  }
+  .testimonial__avatar:nth-child(odd),
+  .testimonial__avatar:nth-child(even) {
+    margin: 0 0 8px;
+  }
+  .testimonial__speech-bubble {
+    padding: 18px 14px;
+  }
+  .testimonial__speech-bubble {
+    order: 1;
+  }
+
+  .arrow-up {
+    width: 45px;
+    height: 45px;
+    bottom: 16px;
+    right: 16px;
+    font-size: 25px;
   }
 }
