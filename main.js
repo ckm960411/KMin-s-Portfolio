@@ -43,11 +43,6 @@ window.addEventListener('scroll', () => {
   navbarMenu.classList.remove('open')
 })
 
-function scrollIntoView(selector) {
-  const scrollTo = document.querySelector(selector)
-  scrollTo.scrollIntoView({behavior: "smooth"})
-}
-
 // 'contact me' 버튼을 클릭하면 'contact' 섹션으로 이동
 const contactBtn = document.querySelector('.home__contact')
 contactBtn.addEventListener('click', () => {
@@ -138,6 +133,12 @@ function selectNavItem(selected) {
   selectedNavItem.classList.remove('active')
   selectedNavItem = selected
   selectedNavItem.classList.add('active')
+}
+
+function scrollIntoView(selector) {
+  const scrollTo = document.querySelector(selector)
+  scrollTo.scrollIntoView({behavior: "smooth"})
+  selectNavItem(navItems[sectionIds.indexOf(selector)])
 }
 
 const observerOptions = {
