@@ -1,4 +1,5 @@
 'use strict'
+import '../scss/style.scss'
 
 const navbar = document.querySelector('#navbar')
 const navbarHeight = navbar.getBoundingClientRect().height
