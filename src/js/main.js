@@ -1,5 +1,7 @@
 'use strict'
 import '../scss/style.scss'
+import dataJson from '../static/data/data.json'
+const myProjects = dataJson.projects
 
 const navbar = document.querySelector('#navbar')
 const navbarHeight = navbar.getBoundingClientRect().height
@@ -79,9 +81,28 @@ arrowUp.addEventListener('click', () => {
   scrollIntoView('#home')
 })
 
+
+// 'category__count' 의 개수가 실제 프로젝트 개수대로 나타나게끔 하기
+const totalCount = myProjects.length
+function getCount(type) {
+  const res = myProjects.filter(project => project.type === type)
+  return res.length
+}
+const categoryCountEls = document.querySelectorAll('.category__count')
+categoryCountEls.forEach(countEl => {
+  if (countEl.parentElement === document.querySelector('[data-filter="*"]')) {
+    countEl.innerHTML = totalCount
+  } else {
+    countEl.innerHTML = getCount(countEl.parentElement.dataset.filter)
+  }
+})
+
 // My Work 에 애니메이션 추가
 const workBtnContainer = document.querySelector('.work__categories')
 const projectContainer = document.querySelector('.work__projects')
+
+displayProjects(myProjects) // data 의 myProjects 가 DOM 요소에 추가된 후 .project 요소를 변수 projects 에 추가해야 하므로
+
 const projects = document.querySelectorAll('.project')
 
 workBtnContainer.addEventListener('click', (e) => {
@@ -112,6 +133,21 @@ workBtnContainer.addEventListener('click', (e) => {
   }, 300)
 })
 
+// data.json 파일로부터 프로젝트들 동적으로 받아오기
+function displayProjects(projects) {
+  projectContainer.innerHTML = projects.map(project => createHTMLString(project)).join('')
+}
+function createHTMLString(project) {
+  return `
+    <a href=${project.gitHubLink} class="project" target="blank" data-type=${project.type}>
+      <img src=${project.imgSrc} alt=${project.title} class="project__img">
+      <div class="project__description">
+        <h3>${project.title}</h3>
+        <span>${project.description}</span>
+      </div>
+    </a>
+  `
+}
 
 
 // 스크롤을 내리면 해당 영역에 해당하는 navbar 가 활성화되기

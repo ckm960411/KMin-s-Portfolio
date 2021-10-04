@@ -1,0 +1,18 @@
+{
+  "projects": [
+    {
+      "type": "front-end",
+      "title": "KMin's Portfolio",
+      "description": "KMin's Portfolio Website",
+      "gitHubLink": "https://blissful-ritchie-26b1c9.netlify.app/",
+      "imgSrc": "./images/kmins-portfolio-project.png"
+    },
+    { 
+      "type": "mini-project", 
+      "title": "mini-clothes-shop", 
+      "description": "shopping-list-mini-project",
+      "gitHubLink": "https://github.com/ckm960411/shopping-list-mini-project",
+      "imgSrc": "./images/shop-mini-project.png"
+    }
+  ]
+}
