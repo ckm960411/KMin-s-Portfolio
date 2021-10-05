@@ -13,6 +13,13 @@
       "description": "shopping-list-mini-project",
       "gitHubLink": "https://github.com/ckm960411/shopping-list-mini-project",
       "imgSrc": "./images/shop-mini-project.png"
+    },
+    {
+      "type": "mini-project",
+      "title": "players-list",
+      "description": "chelsea-players-lineup-mini-project",
+      "gitHubLink": "https://github.com/ckm960411/chelsea-players-list",
+      "imgSrc": "./images/players-lineup-rm1.png"
     }
   ]
 }
